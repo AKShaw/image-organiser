@@ -9,6 +9,7 @@ def get_args():
     arg_parser = argparse.ArgumentParser(description="Image organiser argument helper")
     arg_parser.add_argument('-i', '--input', type=pathlib.Path, required=True)
     arg_parser.add_argument('-o', '--output', type=pathlib.Path, required=True)
+    arg_parser.add_argument('-f', '--faces', action='store_true')
     arg_parser.add_argument('-d', '--debug', action='store_true')
     return arg_parser.parse_args()
 
@@ -23,7 +24,7 @@ def main():
 
     organiser = OrganiserService(source=args.input,
                                  destination=args.output)
-    organiser.organise_images_by_date()
+    organiser.organise_images_by_date(args.faces)
 
 
 if __name__ == "__main__":
