@@ -1,4 +1,5 @@
 import concurrent.futures
+import os
 import threading
 
 import cv2
@@ -11,7 +12,7 @@ class FacialRecognitionService:
         self.face_cascade_classifier = \
             cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 
-    def contains_face(self, image_path,):
+    def contains_face(self, image_path):
         """
         Returns true if the image at image_path contains a face
 
@@ -45,10 +46,11 @@ class FacialRecognitionService:
         resized_img = self.resize_with_aspect_ratio(color_img, height=960)
 
         cv2.imshow("Faces found", resized_img)
-        cv2.waitKey(500)
+        cv2.waitKey(250)
 
         try:
-            return input("Enter a new filename or 'no' to use the existing name: ")
+            return input(f"[{image.split(os.pathsep)[-1]}] Enter a new filename or press enter to use the existing "
+                         f"name: ")
         except EOFError:
             return None
 
@@ -56,7 +58,6 @@ class FacialRecognitionService:
         """
         From https://stackoverflow.com/questions/35180764/opencv-python-image-too-big-to-display
         """
-        dim = None
         (h, w) = image.shape[:2]
 
         if width is None and height is None:
