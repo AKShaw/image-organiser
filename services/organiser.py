@@ -2,7 +2,6 @@ import os
 import logging
 import calendar
 import shutil
-import time
 
 from datetime import datetime
 from pathlib import Path

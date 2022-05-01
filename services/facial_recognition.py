@@ -1,7 +1,4 @@
-import concurrent.futures
 import os
-import threading
-
 import cv2
 
 
